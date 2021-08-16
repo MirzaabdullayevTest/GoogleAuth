@@ -1,12 +1,12 @@
-Start Google Login 
-Passport Intro
-Passport Config & Sessions
-Passport Google Strategy
-User Model
-Auth Routes
+Start Google Login // DONE
+Passport Intro // done
+Passport Config & Sessions // done
+Passport Google Strategy // done
+User Model // done
+Auth Routes // done
 
-Save Google Profile Data
-Logout
-Navigation
-Auth Middleware
+Save Google Profile Data // done
+Logout // done
+Navigation // done
+Auth Middleware // done
 Store Sessions In Database

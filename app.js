@@ -1,13 +1,25 @@
 const express = require('express')
 const dotenv = require('dotenv')
-const morgan = require('morgan')
+const morgan = require('morgan')  // middleware log
 const exphbs = require('express-handlebars')
 const path = require('path')
 const connectDB = require('./config/db')
+const session = require('express-session')
+const MongoStore = require('connect-mongodb-session')(session)
+const passport = require('passport')
 
+// Routes require
 const indexRouter = require('./routes/index')
+const authRouter = require('./routes/auth')
 
 dotenv.config({ path: './config/config.env' })
+
+require('./config/passport')(passport)
+
+const store = new MongoStore({
+    uri: process.env.MONGO_URI,
+    collection: 'sessions'
+})
 
 // Connecting with mongodb
 connectDB()
@@ -39,11 +51,24 @@ app.engine('hbs', exphbs({
     }
 }));
 
+// Session
+app.use(session({
+    secret: 'keyboard cat',
+    resave: false,
+    saveUninitialized: false,
+    store
+}))
+
 //Static folder
 app.use(express.static(path.join(__dirname, 'public')))
 
+// Passport
+app.use(passport.initialize())
+app.use(passport.session())
+
 // Routes
 app.use('/', indexRouter)
+app.use('/auth', authRouter)
 
 const PORT = process.env.PORT || 5000
 
