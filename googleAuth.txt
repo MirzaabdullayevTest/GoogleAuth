@@ -1,0 +1,12 @@
+Start Google Login 
+Passport Intro
+Passport Config & Sessions
+Passport Google Strategy
+User Model
+Auth Routes
+
+Save Google Profile Data
+Logout
+Navigation
+Auth Middleware
+Store Sessions In Database
